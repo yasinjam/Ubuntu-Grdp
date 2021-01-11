@@ -16,6 +16,9 @@ jobs:
       # Ubuntu default will take upto 6-7 min
       # sudo apt update && sudo apt install ubuntu-desktop
       
+      # For UKUI (Awesome UI) (4-5 min)
+      # sudo add-apt-repository ppa:ubuntukylin-members/ukui -y && sudo apt update && sudo apt install ukui-desktop-environment
+      
       # For KDE Plasma (10 min)
       # sudo apt update && sudo apt install tasksel && sudo tasksel install kubuntu-desktop
       
