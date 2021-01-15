@@ -12,7 +12,7 @@ Steps:
 
 5. Click on Run WorkFlow
 
-6. There instead of null replace it with the whole code that you just coppied 
+6. Replace " paste your code here " with the whole code that you just coppied 
 
 7. Now just Run the WorkFlow
 
