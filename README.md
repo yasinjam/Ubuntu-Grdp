@@ -18,7 +18,7 @@ Steps:
 
 8. Find your rdp here https://remotedesktop.google.com
 
-** Default pin is 123456 **
+## Default pin is 123456 
 
 You can also use chrome remote desktop apk
 
