@@ -69,19 +69,23 @@ jobs:
            sudo adduser Area69Lab chrome-remote-desktop
     - name: generate script
       run: |
-           touch setup.sh
-           echo "${{ github.event.inputs.auth }}" >> "setup.sh"
-           cat setup.sh
-    - name: initialize GRDP
-      run: |
+           touch yo.sh
+           echo "${{ github.event.inputs.auth }}" >> "yo.sh"
+           cat yo.sh
+           chmod 777 yo.sh
            ls
-           expect -c "
-           spawn ${{ github.event.inputs.auth }}
-           expect "\Enter a PIN of at least six digits: \r"
-           send "\123456\r"
-           expect "Enter the same PIN again: \r"
-           send "\123456\r"          
-           interact" 
+    - name: initialize GRDP
+      run: |   
+           expect -c '
+           spawn ./yo.sh
+           expect "Enter a PIN of at least six digits: "
+           send "123456\r"
+           expect "Enter the same PIN again: "
+           send "123456\r"
+           expect eof
+           '
+           
+
 
            
      # chmod 777 setup.sh
