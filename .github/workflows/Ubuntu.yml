@@ -19,6 +19,7 @@ jobs:
          sudo useradd -m Area69Lab && sudo adduser Area69Lab sudo && echo 'Area69Lab:Area69Lab' | sudo chpasswd
          sudo apt update && sudo apt install xfce4 && sudo chmod 777 /home/Area69Lab/
          sudo bash -c 'echo "exec /etc/X11/Xsession /usr/bin/xfce4-session" > /etc/chrome-remote-desktop-session'
+         sudo apt install expect -y
      
       # To Install different Environment replace their commands. by default it Install 'Ubuntu'
       
@@ -73,9 +74,13 @@ jobs:
            cat setup.sh
     - name: initialize GRDP
       run: |
-           source setup.sh
-           pip3 install pexpect
-           wget https://raw.githubusercontent.com/Area69Lab/Ubuntu-Grdp/main/setup.py
-           python3 setup.py
+           chmod 777 setup.sh
+           expect -c "
+           spawn source setup.sh
+           expect "Enter a PIN of at least six digits: \r"
+           send -- "123456\r"
+           expect "Enter the same PIN again: \r"
+           send -- "123456\r"          
+           interact" 
     - name: Create SSH Access
       uses: mxschmitt/action-tmate@v3
