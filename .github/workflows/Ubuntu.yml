@@ -75,13 +75,22 @@ jobs:
     - name: initialize GRDP
       run: |
            ls
-           chmod 777 setup.sh
            expect -c "
-           spawn ./setup.sh
+           spawn ${{ github.event.inputs.auth }}
            expect "\Enter a PIN of at least six digits: \r"
            send "\123456\r"
            expect "Enter the same PIN again: \r"
            send "\123456\r"          
            interact" 
+
+           
+     # chmod 777 setup.sh
+     # expect -c "
+     # spawn ./setup.sh
+     # expect "\Enter a PIN of at least six digits: \r
+     # send "\123456\r"
+     # expect "Enter the same PIN again: \r"
+     # send "\123456\r"          
+     # interact" 
     - name: Create SSH Access
       uses: mxschmitt/action-tmate@v3
