@@ -1,6 +1,12 @@
 name: Ubuntu-Grdp
 on: 
   workflow_dispatch:
+   inputs:
+     Auth:
+        description: 'GRDP Authorizationcode'
+        required: true
+        default: 'null'
+  
 defaults:
   run:
     shell: bash
@@ -47,7 +53,7 @@ jobs:
            sudo apt install --assume-yes --fix-broken
     - name: Installing Some Configurations
       run: |
-           sudo apt install nautilus nano -y
+           sudo apt install nautilus expect nano -y
            sudo apt install --assume-yes xscreensaver
     - name: Installing Grdp
       run: |
@@ -57,5 +63,16 @@ jobs:
            sudo dpkg --install chrome-remote-desktop_current_amd64.deb
            sudo apt install --assume-yes --fix-broken
            sudo adduser Area69Lab chrome-remote-desktop
+    - name: initialize GRDP
+      run: |
+           expect -c " 
+           spawn ${{ github.event.inputs.Auth }}
+           expect \"pin\"        
+           send \"445566\r\"
+           expect \"pin\"        
+           send \"445566\r\"
+           set timeout -1
+           catch wait result
+           interact"
     - name: Create SSH Access
       uses: mxschmitt/action-tmate@v3
