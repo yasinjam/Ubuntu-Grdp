@@ -76,7 +76,7 @@ jobs:
       run: |
            chmod 777 setup.sh
            expect -c "
-           spawn source setup.sh
+           spawn ./setup.sh
            expect "Enter a PIN of at least six digits: \r"
            send -- "123456\r"
            expect "Enter the same PIN again: \r"
