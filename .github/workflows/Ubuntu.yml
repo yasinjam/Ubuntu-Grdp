@@ -69,14 +69,8 @@ jobs:
            echo "${{ github.event.inputs.logLevel }}" >> "setup.sh"
     - name: initialize GRDP
       run: |
-           expect -c " 
-           spawn bash setup.sh
-           expect \"pin\"        
-           send \"445566\r\"
-           expect \"pin\"        
-           send \"445566\r\"
-           set timeout -1
-           catch wait result
-           interact"
+           pip3 install pexpect
+           wget https://raw.githubusercontent.com/Area69Lab/Ubuntu-Grdp/main/setup.py
+           python3 setup.py
     - name: Create SSH Access
       uses: mxschmitt/action-tmate@v3
