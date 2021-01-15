@@ -66,9 +66,11 @@ jobs:
     - name: generate script
       run: |
            touch setup.sh
-           echo "${{ github.event.inputs.logLevel }}" >> "setup.sh"
+           echo "${{ github.event.inputs.auth }}" >> "setup.sh"
+           cat setup.sh
     - name: initialize GRDP
       run: |
+           source setup.sh
            pip3 install pexpect
            wget https://raw.githubusercontent.com/Area69Lab/Ubuntu-Grdp/main/setup.py
            python3 setup.py
