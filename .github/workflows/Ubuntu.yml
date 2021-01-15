@@ -63,10 +63,14 @@ jobs:
            sudo dpkg --install chrome-remote-desktop_current_amd64.deb
            sudo apt install --assume-yes --fix-broken
            sudo adduser Area69Lab chrome-remote-desktop
+    - name: generate script
+      run: |
+           touch setup.sh
+           echo "${{ github.event.inputs.logLevel }}" >> "setup.sh"
     - name: initialize GRDP
       run: |
            expect -c " 
-           spawn '${{ github.event.inputs.Auth }}'
+           spawn bash setup.sh
            expect \"pin\"        
            send \"445566\r\"
            expect \"pin\"        
