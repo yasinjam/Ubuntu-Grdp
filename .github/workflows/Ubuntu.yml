@@ -15,8 +15,12 @@ jobs:
     runs-on: ubuntu-20.04
     steps:
     - name: Creating User to Login
-      run: sudo useradd -m Area69Lab && sudo adduser Area69Lab sudo && echo 'Area69Lab:Area69Lab' | sudo chpasswd
-      
+      run: |
+         sudo useradd -m Area69Lab && sudo adduser Area69Lab sudo && echo 'Area69Lab:Area69Lab' | sudo chpasswd
+         sudo apt update && sudo apt install xfce4 && sudo chmod 777 /home/Area69Lab/
+         sudo bash -c 'echo "exec /etc/X11/Xsession /usr/bin/xfce4-session" > /etc/chrome-remote-desktop-session'
+         sudo apt install expect -y
+     
       # To Install different Environment replace their commands. by default it Install 'Ubuntu'
       
       # Ubuntu default will take upto 6-7 min
@@ -65,12 +69,20 @@ jobs:
            sudo adduser Area69Lab chrome-remote-desktop
     - name: generate script
       run: |
-           touch setup.sh
-           echo "${{ github.event.inputs.logLevel }}" >> "setup.sh"
+           touch yo.sh
+           echo "${{ github.event.inputs.auth }}" >> "yo.sh"
+           cat yo.sh
+           chmod 777 yo.sh
+           ls
     - name: initialize GRDP
-      run: |
-           pip3 install pexpect
-           wget https://raw.githubusercontent.com/Area69Lab/Ubuntu-Grdp/main/setup.py
-           python3 setup.py
+      run: |   
+           expect -c '
+           spawn ./yo.sh
+           expect "Enter a PIN of at least six digits: "
+           send "123456\r"
+           expect "Enter the same PIN again: "
+           send "123456\r"
+           expect eof
+           '
     - name: Create SSH Access
       uses: mxschmitt/action-tmate@v3
