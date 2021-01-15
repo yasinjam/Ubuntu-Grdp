@@ -3,7 +3,7 @@ on:
   workflow_dispatch:
    inputs:
      auth:
-        description: 'GRDP Authorizationcode'
+        description: 'GRDP Authorization Code'
         required: true
         default: 'paste your code here'
   
