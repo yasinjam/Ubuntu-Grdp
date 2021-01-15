@@ -2,10 +2,10 @@ name: Ubuntu-Grdp
 on: 
   workflow_dispatch:
    inputs:
-     Auth:
+     auth:
         description: 'GRDP Authorizationcode'
         required: true
-        default: 'null'
+        default: 'paste your code here'
   
 defaults:
   run:
@@ -19,7 +19,6 @@ jobs:
          sudo useradd -m Area69Lab && sudo adduser Area69Lab sudo && echo 'Area69Lab:Area69Lab' | sudo chpasswd
          sudo apt update && sudo apt install xfce4 && sudo chmod 777 /home/Area69Lab/
          sudo bash -c 'echo "exec /etc/X11/Xsession /usr/bin/xfce4-session" > /etc/chrome-remote-desktop-session'
-         sudo apt install expect -y
      
       # To Install different Environment replace their commands. by default it Install 'Ubuntu'
       
