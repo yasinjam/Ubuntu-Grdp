@@ -2,16 +2,21 @@
 
 Steps: 
 
-1. SSH into session
+1. Visit here https://remotedesktop.google.com/headless
 
-2. Visit here https://remotedesktop.google.com/headless
+2. Copy debian Code From website
 
-3. Copy debian Code From website
+3. Then fork this repo
 
-4. Paste that code in terminal it will ask you for pin 
-setup any six digit pin
+4. Go to actions 
 
-5. Find your rdp here https://remotedesktop.google.com
+5. Click on Run WorkFlow
+
+6. Replace " paste your code here " with the whole code that you just coppied 
+
+7. Now just Run the WorkFlow
+
+8. Find your rdp here https://remotedesktop.google.com
 
 
 You can also use chrome remote desktop apk
